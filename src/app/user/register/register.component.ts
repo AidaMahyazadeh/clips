@@ -10,9 +10,9 @@ import IUser from 'src/app/models/user.model';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-  constructor(private auth : AuthService) { }
+  constructor(private auth: AuthService) { }
 
-  inSubmission=false
+  inSubmission = false
   name = new FormControl('', [
     Validators.required,
     Validators.minLength(3)
@@ -23,7 +23,7 @@ export class RegisterComponent {
     Validators.email
   ])
 
-  age = new FormControl <number | null>(null, [
+  age = new FormControl<number | null>(null, [
     Validators.required,
     Validators.min(18),
     Validators.max(80)
@@ -62,20 +62,20 @@ export class RegisterComponent {
     this.showAlert = true
     this.alertMsg = "Please wait!Your account is being created."
     this.alertColor = "blue"
-    this.inSubmission=true
-    
-    try{
-    await this.auth.createUser(this.registerForm.value as IUser)
-    }catch(er){
+    this.inSubmission = true
+
+    try {
+      await this.auth.createUser(this.registerForm.value as IUser)
+    } catch (er) {
       console.error(er)
-      this.alertColor="red"
-      this.alertMsg="something wrong,please try it again."
-      this.inSubmission=false
+      this.alertColor = "red"
+      this.alertMsg = "something wrong,please try it again."
+      this.inSubmission = false
       return
     }
 
-   this.alertColor="green"
-   this.alertMsg="your account has been created."
+    this.alertColor = "green"
+    this.alertMsg = "your account has been created."
   }
 
 }
