@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ClipComponent } from './clip/clip.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-
+import { ClipService } from './services/clip.service';
 const routes: Routes = [
   {
     path : '',
@@ -16,8 +16,16 @@ const routes: Routes = [
   },
   {
     path : "clip/:id",
-    component: ClipComponent
+    component: ClipComponent,
+    resolve : {
+      clip :ClipService
+    }
   },
+  {
+    path :'',
+    loadChildren: async()=>(await import ('./video/video.module')).VideoModule
+      
+    },
   {
     path : '**',
     component :NotFoundComponent
